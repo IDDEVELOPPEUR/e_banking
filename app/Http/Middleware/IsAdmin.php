@@ -20,6 +20,12 @@ class IsAdmin
 
         return $next($request);
         }
+
+//
+//        if($request->role === 'admin'){
+//            return $next($request);
+//        }
+//        abort(403);
         return redirect()->route('dashboard');
     }
 }
