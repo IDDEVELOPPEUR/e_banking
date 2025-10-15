@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -32,7 +33,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    public function contact()
+    {
+        //pour dire qu'un user peut avoir plusieurs contacts
+        return $this->hasMany(Contact::class, 'user_id');
+    }
+    //un user peut avoir plusieurs comptes
+ public function compte(){
+                return $this->hasOne(Compte::class, 'user_id');
+            }
     /**
      * Get the attributes that should be cast.
      *
@@ -44,5 +53,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+
     }
+
 }

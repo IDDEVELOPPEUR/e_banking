@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create(table: 'transferes', callback: function (Blueprint $table): void {
             $table->id();
             $table->timestamps();
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('adresse');
-            $table->string('telephone');
-            $table->string('rib');
+            $table->string('montant');
+            $table->string('type-transfert');
+            $table->string('rib-source');
+            $table->string('rib-destination');
+            $table->foreignId('compte_id')->constrained()->onDelete('cascade');
 
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('transferes');
     }
 };

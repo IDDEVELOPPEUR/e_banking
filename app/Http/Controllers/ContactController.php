@@ -12,14 +12,12 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $liste = Contact::all();
+        $liste = Contact::all()->where('user_id', auth()->user()->id);
 
         return view('contacts.index',compact('liste'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('contacts.create');
@@ -36,14 +34,15 @@ class ContactController extends Controller
             'prenom' => 'required|min:2',
             'adresse' => 'required|min:2',
             'telephone' => 'required|max:9',
-            'Mib' => 'required|string|max:13|',
+            'rib' => 'required|string|max:13|',
         ]);
         $contact = new Contact();
         $contact->nom = $request->nom;
         $contact->prenom = $request->prenom;
         $contact->adresse = $request->adresse;
         $contact->telephone = $request->telephone;
-        $contact->Mib = $request->Mib;
+        $contact->rib = $request->rib;
+        $contact->user_id = auth()->user()->id;
         $contact->save();
 
 
@@ -79,11 +78,12 @@ class ContactController extends Controller
         $contact->nom = $request->nom;
         $contact->adresse = $request->adresse;
         $contact->telephone = $request->telephone;
-        $contact->Mib = $request->Mib;
+        $contact->rib = $request->rib;
 
         $contact->update();
         return redirect('contacts')->with('status',"contact mis a jour avec success");
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -93,5 +93,9 @@ class ContactController extends Controller
         $contact= Contact::find($id);
         $contact->delete();
         return redirect('contacts')->with('status',"contact supprimé avec success");
+    }
+
+    public function isepVue(){
+        return view('contacts.isep');
     }
 }

@@ -49,12 +49,12 @@
             <input type="text" class="form-control" name="telephone" id="numero" value="{{$contact->telephone}}">
         </div>
         <div class="form-group">
-            <label for="mib" class="form-label">Mib</label>
-            <input type="text" class="form-control" name="Mib" id="mib" value="{{$contact->Mib}}">
+            <label for="mib" class="form-label">rib</label>
+            <input type="text" class="form-control" name="rib" id="mib" value="{{$contact->rib}}">
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Ajouter </button>
-        <a href="/listeContact" class="btn btn-danger">Retour</a>
+        <a href="/contacts" class="btn btn-seconde">Retour</a>
 
     </form>
 </div>

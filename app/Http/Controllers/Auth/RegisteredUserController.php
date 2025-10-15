@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Compte;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,6 +45,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        $compte = new Compte();
+        $compte->rib = 'SN'.strtoupper(substr(sha1(time()), 0, 10));
+        $compte->user_id = $user->id;
+        $compte->is_actif = false;
+        $compte->save();
 
         return redirect(route('dashboard', absolute: false));
     }

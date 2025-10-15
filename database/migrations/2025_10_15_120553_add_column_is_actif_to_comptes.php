@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin', 'client'])->default('admin');
+        Schema::table('comptes', function (Blueprint $table) {
+            $table->boolean('is_actif')->default(false);
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('comptes', function (Blueprint $table) {
             //
         });
     }

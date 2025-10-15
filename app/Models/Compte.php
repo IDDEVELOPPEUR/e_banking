@@ -4,20 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Compte extends Model
 {
     protected  $filiable = [
-        'nom',
-        'prenom',
-        'adresse',
-        'telephone',
-        'rib'
+        'rib',
+        'user_id',
     ];
 
     public function user()
     {
-        //pour dire que chaque contact appartient a un user
         return $this->belongsTo(User::class);
     }
-
 }
