@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -41,12 +42,17 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         event(new Registered($user));
 
         Auth::login($user);
         $compte = new Compte();
-        $compte->rib = 'SN'.strtoupper(substr(sha1(time()), 0, 10));
+
+        //ici j'intensialise le rib ave le prefixe SN suivi de 11 chiffres aléatoires EN UTILISANT LA FONCTION random_int
+        $rib='SN';
+          for($i=0; $i <11 ; $i++) {
+          $rib .= Str::random_int(0,9);
+         }
+        $compte->rib = $rib;
         $compte->user_id = $user->id;
         $compte->is_actif = false;
         $compte->save();

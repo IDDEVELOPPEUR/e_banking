@@ -28,7 +28,7 @@ class TransfereController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTransfereRequest $request)
+    public function store(Request $request)
     {
         $request->validate([
             'montant' => 'required',
@@ -37,6 +37,7 @@ class TransfereController extends Controller
             'rib-destination' => 'required',
             'compte_id' => 'required',
         ]);
+        $re_sourc->$request->
         $transfere = new Transfere();
         $transfere->montant = $request->montant;
         $transfere->type = $request->type-transfert;
